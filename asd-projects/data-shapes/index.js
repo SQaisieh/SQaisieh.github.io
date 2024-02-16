@@ -45,17 +45,17 @@ $(document).ready(function () {
   };
   dataShapes.push(shape);
   // TODO 2: add a new property to all data shapes
-  for (var i = 0 ; i < dataShapes; i++){
-    var currentShape = (dataShapes.color[i])
+  for (var i = 0 ; i < dataShapes.length; i++){
+    var currentShape = dataShapes[i];
 
-    if (currentShape === "red"){
-      currentShape.goodBehavior = "bounce"
+    if (currentShape.color === "red"){
+      currentShape.goodBehavior = "bounce";
     }
-    else if (currentShape === "blue"){
-      currentShape.goodBehavior = "blink"
+    else if (currentShape.color === "blue"){
+      currentShape.goodBehavior = "blink";
     }
     else{
-      currentShape.goodBehavior = "spin"
+      currentShape.goodBehavior = "spin";
     }
 
   }
@@ -63,15 +63,22 @@ $(document).ready(function () {
 
   // TODO 3-a: add a function that handles the static display type
   function handleStatic(data){
-    setBackgroundWithObject(data)
-    animationDetails.displayType = 1
+    setBackgroundWithObject(data);
+    animationDetails.displayType = 1;
   }
 
   // TODO 4-a: add a function that handles the good display type
-  
+  function handleGood(color, shape, repeat){
+    setBackgroundWithSimple(color, shape, repeat);
+    animationDetails.displayType = 2;
+  }
 
   // TODO 5-a: add a function that handles the bad display type
-  
+  function handleBad(data, repeat){
+    repeat++;
+    setBackgroundWithMixed(data, repeat);
+    animationDetails.displayType = 3;
+  }
 
   /////////////////////////////////////////////////
   // BUTTON HANDLERS BELOW HERE (3-b, 4-b, 5-b) ///
@@ -79,17 +86,21 @@ $(document).ready(function () {
 
   function staticDisplay() {
     // TODO 3-b: call your handleStatic function
-    handleStatic(dataShapes[currentIndex])
+    var currentShape = dataShapes[currentIndex]
+    handleStatic(currentShape);
   }
 
   function goodDisplay() {
     // TODO 4-b: call your handleGood function
-    
+    var currentShape = dataShapes[currentIndex];
+    handleGood(currentShape.color, currentShape.shape, currentShape.repeat );
   }
 
   function badDisplay() {
     // TODO 5-b: call your handleBad function
-    
+    var currentShape = dataShapes[currentIndex];
+    var repeat = currentShape.repeat;
+    handleBad(currentShape, repeat);
   }
 
   /////////////////////////////////////////////////
