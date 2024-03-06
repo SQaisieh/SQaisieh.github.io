@@ -213,8 +213,23 @@ function handleAppleCollision() {
   */
   var row = 0;
   var column = 0;
-
   // code to determine the row and column of the snakeSquare to add to the snake
+  if(snake.tail.direction === "left"){
+    row = snake.tail.row + 1
+    column = snake.tail.column
+  }
+  else if(snake.tail.direction === "right"){
+    row = snake.tail.row - 1
+    column = snake.tail.column
+  }
+  else if(snake.tail.direction === "up"){
+    row = snake.tail.row 
+    column = snake.tail.column - 1
+  }
+  else if(snake.tail.direction === "down"){
+    row = snake.tail.row 
+    column = snake.tail.column + 1
+  }
 
   makeSnakeSquare(row, column);
 }
