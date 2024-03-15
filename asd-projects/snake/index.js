@@ -122,6 +122,23 @@ function moveSnake() {
   column/row properties. 
   
   */
+for ( var i = snake.body.length -1 ; i > 0; i-- ) {
+    if (i > 0){
+          var snakeSquare = snake.body[i];
+
+          var nextSnakeSquare = snake.body[i-1];
+          var nextRow = nextSnakeSquare.row;
+
+          var nextColumn = nextSnakeSquare.column;
+          var nextDirection = nextSnakeSquare.direction;
+
+          snakeSquare.direction = nextDirection
+          snakeSquare.row = nextRow;
+          snakeSquare.column = nextColumn;
+          repositionSquare(snakeSquare);
+
+    }
+}
 
   //Before moving the head, check for a new direction from the keyboard input
   checkForNewDirection();
@@ -214,21 +231,29 @@ function handleAppleCollision() {
   var row = 0;
   var column = 0;
   // code to determine the row and column of the snakeSquare to add to the snake
-  if(snake.tail.direction === "left"){
-    row = snake.tail.row + 1
-    column = snake.tail.column
+  var row = snake.tail.row; 
+  var column = snake.tail.column;
+
+  // code to determine the row and column of the snakeSquare to add to the snake
+  if (snake.tail.direction === "right"){
+    column = snake.tail.column + 1 ;
+
+
   }
-  else if(snake.tail.direction === "right"){
-    row = snake.tail.row - 1
-    column = snake.tail.column
+  if (snake.tail.direction === "left"){
+    column = snake.tail.column - 1 ;
+
+
   }
-  else if(snake.tail.direction === "up"){
-    row = snake.tail.row 
-    column = snake.tail.column - 1
+  if (snake.tail.direction === "up"){
+
+    row = snake.tail.row - 1 ;
+
   }
-  else if(snake.tail.direction === "down"){
-    row = snake.tail.row 
-    column = snake.tail.column + 1
+  if (snake.tail.direction === "down"){
+
+    row = snake.tail.row + 1 ;
+
   }
 
   makeSnakeSquare(row, column);
@@ -243,6 +268,16 @@ function hasCollidedWithSnake() {
   head and each part of the snake's body also knows its own row and column.
   
   */
+  for (var i = snake.body.length -1; i > 0 ; i--){
+    if (snake.body[i].row === snake.head.row){
+      if (snake.body[i].column === snake.head.column){
+        alert("collision")
+        return true
+      }
+    }
+  }
+  
+    return false;
 
   return false;
 }
@@ -364,7 +399,14 @@ function getRandomAvailablePosition() {
     spaceIsAvailable to false so that a new position is generated.
     */
   }
+  for (var i = snake.body.length-1; i >= 0; i--){
+    if (snake.body[i].row === randomPosition.row){
+      if (snake.body[i].column ===randomPosition.column){
+        spaceIsAvailable = false
 
+      }
+    }
+  }
   return randomPosition;
 }
 
