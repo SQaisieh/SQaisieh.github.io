@@ -11,6 +11,21 @@ function runProgram(){
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   
+  var KEY = {
+    LEFT: 37,
+    UP: 38,
+    RIGHT: 39,
+    DOWN: 40,
+  };
+
+  walker = {
+    positionX: 0,
+    positionY: 0,
+    speedX: 0,
+    speedY: 0,
+  }
+
+
   // Game Item Objects
 
 
@@ -35,9 +50,19 @@ function runProgram(){
   Called in response to events.
   */
   function handleKeyDown(event) {
-    console.log(event)
+    if (event.which === KEY.LEFT) {
+      console.log("left pressed");
+    }
+    if (event.which === KEY.UP) {
+      console.log("up pressed");
+    }
+    if (event.which === KEY.RIGHT) {
+      console.log("right pressed");
+    }
+    if (event.which === KEY.DOWN) {
+      console.log("down pressed");
+    }
   }
-
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -52,3 +77,5 @@ function runProgram(){
   }
   
 }
+
+
